@@ -13,9 +13,9 @@ jobs:
       - name: Build WAR using Maven
         run: mvn clean package
       - name: Deploy WAR to Tomact
-        run: 
-             WAR_FILE=$(ls target/*.war | head -n 1)
-             APP_NAME=myapp
-             curl -u "${{ secrets.TOMCAT_USERNAME }}:${{ secrets.TOMCAT_PASSWORD }}" \
-               --upload-file "$WAR_FILE" "http://${{ TOMCAT_HOST }}:8081/manager/text/deploy?path=/$APP_NAME&update=true"
+        run: |
+            WAR_FILE=$(ls target/*.war | head -n 1)
+            APP_NAME=myapp
+            curl -u "${{ secrets.TOMCAT_USERNAME }}:${{ secrets.TOMCAT_PASSWORD }}" \
+               --upload-file "$WAR_FILE" "http://${{ secrets.TOMCAT_HOST }}:8081/manager/text/deploy?path=/$APP_NAME&update=true"
      
