@@ -6,10 +6,15 @@ on:
   workflow_dispatch:
 jobs:
   deploy:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v3
+      - name: Set up JDK
+        uses: actions/setup-java@v3
+        with: 
+          ditribution: 'temurin'
+          java-version: '11'
       - name: Build WAR using Maven
         run: mvn clean package
       - name: Deploy WAR to Tomact
